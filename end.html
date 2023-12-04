@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Restaurant Search</title>
+    <style>
+        /* Add your CSS styles here */
+        /* Example: Style for the search bar */
+        #search-bar {
+            width: 300px;
+            padding: 5px;
+        }
+
+        /* Style for hiding the restaurant list container */
+        #restaurant-list {
+            display: none;
+        }
+
+        /* Style for restaurant images */
+        .restaurant-image {
+            max-width: 400px;
+            max-height: 300px;
+        }
+image-container {
+    display: flex; /* Use flexbox to arrange images side by side */
+}
+
+.image-container img {
+    margin: 10px; /* Add some spacing between the images */
+}
+
+
+        /* Style for restaurant items in the gallery */
+        .restaurant-item {
+            max-width: 48%; /* Adjust the width as needed */
+            margin-bottom: 20px; /* Add space between rows */
+            box-sizing: border-box;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+        }
+
+        .restaurant-image {
+            max-width: 100%;
+            height: auto;
+        }
+
+body {
+    background-image: url('https://i.postimg.cc/j2HPx3qM/r.webp'); /* Replace 'path/to/your/image.jpg' with the actual path or URL of your background image */
+    background-size: cover; /* Adjust to your preferred size behavior */
+    background-repeat: no-repeat; /* Prevent repeating the image */
+    background-attachment: fixed; /* Keep the background fixed */
+    /* You can also set background color or other styles here */
+}
+    </style>
+    <link rel="stylesheet" href="end.css" />
+
+</head>
+<body>
+    <h1>Restaurant Search</h1>
+    
+    <!-- Search bar for dish name -->
+    <input type="text" id="search-bar" placeholder="Search for a dish" onclick="showRestaurantImage()">
+    
+    <!-- Sorting options -->
+    <label for="sort-select">Sort by:</label>
+    <select id="sort-select">
+        <option value="lowToHigh">Low to High</option>
+        <option value="highToLow">High to Low</option>
+    </select>
+    <button id="search-button">Search</button>
+
+    <!-- Restaurant list container -->
+    <div id="restaurant-list">
+        <!-- Restaurant items will be added here dynamically -->
+    </div>
+
+    <script>
+                 const restaurants = [
+            {
+                restaurantName: "Homestyle bites",
+                dishName: "Idly",
+                cost: 90,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Idly",
+                cost: 50,
+                image: "https://i.postimg.cc/5NMyhHng/j2.jpg"
+
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Idly",
+                cost: 60,
+                image: "https://i.postimg.cc/x8VjV7y8/j3.jpg"
+
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Idly",
+                cost: 80,
+                image: "https://i.postimg.cc/k5wW4Qh7/j4.jpg"
+
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Idly",
+                cost: 100,
+                image: "https://i.postimg.cc/ZYWsGnCW/j5.jpg"
+
+            },
+
+
+
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Dosa",
+                cost: 100,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Dosa",
+                cost: 90,
+                image: "https://i.postimg.cc/5NMyhHng/j2.jpg"
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Dosa",
+                cost: 70,
+                image: "https://i.postimg.cc/x8VjV7y8/j3.jpg"
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Dosa",
+                cost: 120,
+                image: "https://i.postimg.cc/k5wW4Qh7/j4.jpg"
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Dosa",
+                cost: 140,
+                image: "https://i.postimg.cc/ZYWsGnCW/j5.jpg"
+            },
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Noodles",
+                cost: 150,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Noodles",
+                cost: 140,
+                image: "https://i.postimg.cc/5NMyhHng/j2.jpg"
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Noodles",
+                cost: 180,
+                image: "https://i.postimg.cc/x8VjV7y8/j3.jpg"
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Noodles",
+                cost: 200,
+                image: "https://i.postimg.cc/k5wW4Qh7/j4.jpg"
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Noodles",
+                cost: 100,
+                image: "https://i.postimg.cc/ZYWsGnCW/j5.jpg"
+            },
+
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Biryani",
+                cost: 200,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Biryani",
+                cost: 180,
+                image: "https://i.postimg.cc/5NMyhHng/j2.jpg"
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Biryani",
+                cost: 300,
+                image: "https://i.postimg.cc/x8VjV7y8/j3.jpg"
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Biryani",
+                cost: 250,
+                image: "https://i.postimg.cc/k5wW4Qh7/j4.jpg"
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Biryani",
+                cost: 120,
+                image: "https://i.postimg.cc/k5wW4Qh7/j5.jpg"
+            },
+
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Roti",
+                cost: 5,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Roti",
+                cost: 4,
+                image: "https://i.postimg.cc/nLwMg0P9/j2.jpg"
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Roti",
+                cost: 6,
+                image: "https://i.postimg.cc/nLwMg0P9/j3.jpg"
+
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Roti",
+                cost: 8,
+                image: "https://i.postimg.cc/nLwMg0P9/j4.jpg"
+
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Roti",
+                cost: 10,
+                image: "https://i.postimg.cc/nLwMg0P9/j5.jpg"
+
+            },
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Manchuria",
+                cost: 90,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Manchuria",
+                cost: 110,
+                image: "https://i.postimg.cc/nLwMg0P9/j2.jpg"
+
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Manchuria",
+                cost: 60,
+                image: "https://i.postimg.cc/nLwMg0P9/j3.jpg"
+
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Manchuria",
+                cost: 80,
+                image: "https://i.postimg.cc/nLwMg0P9/j4.jpg"
+
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Manchuria",
+                cost: 100,
+                image: "https://i.postimg.cc/nLwMg0P9/j5.jpg"
+
+            },
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Milkshake",
+                cost: 90,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Milkshake",
+                cost: 85,
+                image: "https://i.postimg.cc/nLwMg0P9/j2.jpg"
+
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Milkshake",
+                cost: 60,
+                image: "https://i.postimg.cc/nLwMg0P9/j3.jpg"
+
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Milkshake",
+                cost: 40,
+                image: "https://i.postimg.cc/nLwMg0P9/j4.jpg"
+
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Milkshake",
+                cost: 100,
+                image: "https://i.postimg.cc/nLwMg0P9/j5.jpg"
+
+            },
+
+
+
+
+
+
+
+{
+                restaurantName: "Homestyle bites",
+                dishName: "Ice-cream",
+                cost: 30,
+                image: "https://i.postimg.cc/nLwMg0P9/j1.jpg"
+
+            },
+{
+                restaurantName: "Flavours of the earth",
+                dishName: "Ice-cream",
+                cost: 50,
+                image: "https://i.postimg.cc/nLwMg0P9/j2.jpg"
+
+            },
+{
+                restaurantName: "Royal cuisine",
+                dishName: "Ice-cream",
+                cost: 60,
+                image: "https://i.postimg.cc/nLwMg0P9/j3.jpg"
+
+            },
+{
+                restaurantName: "Flavourful Fusion",
+                dishName: "Ice-cream",
+                cost: 80,
+                image: "https://i.postimg.cc/nLwMg0P9/j4.jpg"
+
+            },
+{
+                restaurantName: "Snap&savour",
+                dishName: "Ice-cream",
+                cost: 100,
+                image: "https://i.postimg.cc/nLwMg0P9/j5.jpg"
+
+            },
+
+
+            // Add more restaurant data here
+        ];
+
+        const searchInput = document.getElementById('search-bar');
+        const sortSelect = document.getElementById('sort-select');
+        const restaurantList = document.getElementById('restaurant-list');
+
+        function showRestaurantImage() {
+            searchInput.removeEventListener('click', showRestaurantImage);
+            searchInput.addEventListener('click', function() { });
+            const searchTerm = searchInput.value.toLowerCase();
+            const sortOrder = sortSelect.value;
+
+            const filteredRestaurants = restaurants.filter(restaurant => {
+                return restaurant.dishName.toLowerCase().includes(searchTerm);
+            });
+
+            filteredRestaurants.sort((a, b) => {
+                if (sortOrder === 'lowToHigh') {
+                    return a.cost - b.cost;
+                } else if (sortOrder === 'highToLow') {
+                    return b.cost - a.cost;
+                }
+            });
+
+            if (searchTerm) {
+                restaurantList.innerHTML = ''; // Clear the list
+
+                filteredRestaurants.forEach(restaurant => {
+                    const restaurantItem = document.createElement('div');
+                    restaurantItem.innerHTML = `
+                        <h3>${restaurant.restaurantName}</h3>
+                        <p>Dish: ${restaurant.dishName}</p>
+                        <p>Cost: $${restaurant.cost}</p>
+                        <img class="restaurant-image" src="${restaurant.image}" alt="${restaurant.dishName}">
+                    `;
+                    restaurantList.appendChild(restaurantItem);
+                });
+
+                restaurantList.style.display = 'block'; // Show the list
+            } else {
+                restaurantList.style.display = 'none'; // Hide the list when there's no search term
+            }
+        }
+
+        // Add event listener to update the list as the user types
+        searchInput.addEventListener('input', showRestaurantImage);
+        sortSelect.addEventListener('change', showRestaurantImage);
+    </script>
+</body>
+</html>
